@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Paint your images</string>
+    <string name="brush_image">brush_image</string>
+    <string name="color_pallet">color_pallet</string>
+    <string name="background_image">background_image</string>
+    <string name="gallery_image">gallery image</string>
+    <string name="undo">undo</string>
+    <string name="redo">redo</string>
+    <string name="colors">colors</string>
+    <string name="save">save</string>
+    <string name="please_wait">Please Wait...</string>
+    <string name="share">share</string>
+    <string name="select_color">Select color:</string>
+</resources>
