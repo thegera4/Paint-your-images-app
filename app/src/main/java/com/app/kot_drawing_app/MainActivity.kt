@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "Ad was dismissed.")
             }
 
-            override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
+            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
                 Log.d(TAG, "Ad failed to show.")
             }
 
@@ -156,6 +156,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK){
@@ -268,11 +269,13 @@ class MainActivity : AppCompatActivity() {
 
         private lateinit var mProgressDialog: Dialog
 
+        @Deprecated("Deprecated in Java")
         override fun onPreExecute() {
             super.onPreExecute()
             showProgressDialog()
         }
 
+        @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg params: Any?): String {
 
             var result = ""
@@ -310,6 +313,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        @Deprecated("Deprecated in Java")
         override fun onPostExecute(result: String?) {
             super.onPostExecute(result)
             cancelProgressDialog()
