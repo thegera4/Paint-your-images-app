@@ -23,15 +23,10 @@ import androidx.core.view.get
 import com.app.kot_drawing_app.databinding.ActivityMainBinding
 import com.app.kot_drawing_app.databinding.DialogBrushSizeBinding
 import com.app.kot_drawing_app.databinding.DialogColorPickerBinding
-import com.google.android.gms.ads.interstitial.InterstitialAd
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import androidx.annotation.NonNull
-import com.google.android.gms.ads.*
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
-
-
 
 
 
@@ -46,8 +41,6 @@ class MainActivity : AppCompatActivity() {
 
     private var mImageButtonCurrentPaint: ImageButton? = null
 
-    //interstitial ad
-    private var mInterstitialAd: InterstitialAd? = null
     private var TAG = "MainActivity"
 
 
@@ -56,44 +49,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         var view = binding.root
         setContentView(view)
-
-        //ads initialization
-        MobileAds.initialize(this@MainActivity)
-
-        //Banner ad
-        val adReq = AdRequest.Builder().build()
-        binding.adView.loadAd(adReq)
-
-        //interstitial ad
-        val adRequest = AdRequest.Builder().build()
-        InterstitialAd.load(this,"\n" +
-                "ca-app-pub-4193581455913262/4868971382",
-            adRequest, object : InterstitialAdLoadCallback() {
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                Log.d(TAG, adError.message)
-                mInterstitialAd = null
-            }
-            override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                Log.d(TAG, "Ad was loaded.")
-                mInterstitialAd = interstitialAd
-            }
-        })
-
-        mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
-            override fun onAdDismissedFullScreenContent() {
-                Log.d(TAG, "Ad was dismissed.")
-            }
-
-            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
-                Log.d(TAG, "Ad failed to show.")
-            }
-
-            override fun onAdShowedFullScreenContent() {
-                Log.d(TAG, "Ad showed fullscreen content.")
-                mInterstitialAd = null
-            }
-        }
-
 
         supportActionBar?.hide()
 
@@ -138,12 +93,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.ibStorage.setOnClickListener {
-            //Show the Ad
-            if (mInterstitialAd != null) {
-                mInterstitialAd?.show(this)
-            } else {
-                Log.d("TAG", "The interstitial ad wasn't ready yet.")
-            }
             if (isReadStorageAllowed()){
                 BitmapAsyncTask(getBitmapFromView(binding.flDrawingViewContainer)).execute()
             } else {
